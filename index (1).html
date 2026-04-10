@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexFlow — Automatisation IA sur mesure · Algérie</title>
+<meta name="description" content="Chatbots WhatsApp, qualification de leads et pipelines IA — NexFlow automatise votre business 24h/24.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --g:#00D68F;--gd:#00A86B;--gdk:#003d28;--gs:rgba(0,214,143,0.12);
+  --bg:#0a0f0d;--bg2:#111915;--bg3:#162019;
+  --border:#1e2d24;--border2:#243329;
+  --text:#e8f0eb;--text2:#7a9485;--text3:#4d6b59;
+  --font-sans:'DM Sans',sans-serif;--font-display:'Syne',sans-serif;
+  --radius:10px;
+}
+
+body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-size:15px;line-height:1.5}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 36px;height:60px;border-bottom:1px solid var(--border);background:rgba(10,15,13,0.92);backdrop-filter:blur(12px);position:sticky;top:0;z-index:200}
+.logo{font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-0.5px;display:flex;align-items:center;gap:9px}
+.lm{width:30px;height:30px;border-radius:8px;background:var(--g);display:flex;align-items:center;justify-content:center}
+.lm svg{width:15px;height:15px;stroke:#002b1e;fill:none;stroke-width:2.5}
+.logo span{color:var(--g)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;cursor:pointer;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.btn{padding:9px 20px;border-radius:var(--radius);font-size:13px;cursor:pointer;font-family:var(--font-sans);border:1px solid var(--border2);background:var(--bg2);color:var(--text);transition:all .2s}
+.btn:hover{background:var(--bg3);border-color:var(--g)}
+.btn-g{background:var(--g);color:#001a10;border:none;font-weight:600}
+.btn-g:hover{background:var(--gd);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,214,143,0.3)}
+
+/* HERO */
+.hero{padding:80px 36px 64px;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;max-width:1100px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--gs);border:1px solid rgba(0,214,143,0.2);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--g);margin-bottom:20px;font-weight:500}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:var(--font-display);font-size:44px;font-weight:600;line-height:1.1;letter-spacing:-1.2px;margin-bottom:18px}
+.hero h1 .hl{color:var(--g)}
+.hero p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:28px;max-width:420px}
+.hbtns{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+.metrics{display:flex;gap:32px;padding-top:24px;border-top:1px solid var(--border)}
+.mval{font-family:var(--font-display);font-size:26px;font-weight:600;letter-spacing:-0.5px}.mval span{color:var(--g)}
+.mlbl{font-size:12px;color:var(--text2);margin-top:3px}
+
+/* CHAT SHELL */
+.chat-shell{border-radius:16px;border:1px solid var(--border2);overflow:hidden;background:var(--bg2);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.chat-hdr{background:linear-gradient(135deg,var(--gd),#004d30);padding:14px 16px;display:flex;align-items:center;gap:10px}
+.hdr-av{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.hdr-n{font-size:14px;font-weight:600;color:#fff;font-family:var(--font-display)}
+.hdr-s{font-size:11px;color:rgba(255,255,255,.7)}
+.chat-body{height:230px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--bg);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.msg{max-width:82%;padding:10px 14px;font-size:13px;line-height:1.6;animation:pop .25s ease;word-break:break-word}
+.msg.bot{background:var(--bg2);border:1px solid var(--border2);border-radius:4px 14px 14px 14px;align-self:flex-start;color:var(--text)}
+.msg.user{background:var(--g);color:#001a10;border-radius:14px 14px 4px 14px;align-self:flex-end;font-weight:600}
+.msg.typing{background:var(--bg2);border:1px solid var(--border2);border-radius:4px 14px 14px 14px;align-self:flex-start;color:var(--text2);font-style:italic;font-size:12px}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.chat-qr{padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;background:var(--bg2);border-top:1px solid var(--border)}
+.qr{padding:5px 12px;border-radius:20px;border:1px solid rgba(0,214,143,0.35);font-size:11px;color:var(--g);cursor:pointer;background:var(--gs);font-family:var(--font-sans);transition:all .2s;font-weight:500}
+.qr:hover{background:rgba(0,214,143,0.2);border-color:var(--g)}
+.chat-inp{padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:8px;background:var(--bg2)}
+.chat-inp input{flex:1;padding:9px 13px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg);font-size:13px;font-family:var(--font-sans);color:var(--text);outline:none;transition:border-color .2s}
+.chat-inp input::placeholder{color:var(--text3)}
+.chat-inp input:focus{border-color:var(--g)}
+.send-b{width:36px;height:36px;flex-shrink:0;border-radius:var(--radius);background:var(--g);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.send-b:hover{background:var(--gd);transform:scale(1.05)}
+.send-b svg{width:14px;height:14px;stroke:#001a10;fill:none;stroke-width:2.5}
+
+/* SECTIONS */
+.divider{border:none;border-top:1px solid var(--border)}
+.sec{padding:64px 36px;max-width:1100px;margin:0 auto}
+.sec-lbl{font-size:11px;font-weight:600;color:var(--g);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:-0.5px;margin-bottom:10px}
+.sec-sub{font-size:15px;color:var(--text2);line-height:1.75;max-width:460px}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+.svc{border:1px solid var(--border);border-radius:14px;padding:22px;background:var(--bg2);transition:all .25s;position:relative;overflow:hidden}
+.svc::before{content:'';position:absolute;inset:0;border-radius:14px;background:radial-gradient(circle at top left,rgba(0,214,143,.05),transparent 60%);opacity:0;transition:opacity .3s}
+.svc:hover{border-color:var(--g);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,214,143,.1)}
+.svc:hover::before{opacity:1}
+.sic{width:40px;height:40px;border-radius:10px;background:var(--gs);border:1px solid rgba(0,214,143,.2);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.sic svg{width:18px;height:18px;stroke:var(--g);fill:none;stroke-width:1.8}
+.svc h3{font-size:14px;font-weight:600;margin-bottom:6px;font-family:var(--font-display)}
+.svc p{font-size:12px;color:var(--text2);line-height:1.65}
+.stag{display:inline-block;margin-top:10px;font-size:11px;color:var(--g);background:var(--gs);border:1px solid rgba(0,214,143,.2);padding:3px 9px;border-radius:6px;font-weight:500}
+
+/* DEMO */
+.demo-wrap{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.demo-inner{max-width:1100px;margin:0 auto;padding:64px 36px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.dtabs{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.dtab{padding:14px 16px;border-radius:12px;border:1px solid var(--border);cursor:pointer;background:var(--bg);transition:all .2s}
+.dtab:hover{border-color:var(--border2)}
+.dtab.active{border-color:var(--g);background:var(--gs)}
+.dtop{display:flex;align-items:center;gap:10px}
+.dic{width:32px;height:32px;border-radius:8px;background:var(--gs);border:1px solid rgba(0,214,143,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dic svg{width:15px;height:15px;stroke:var(--g);fill:none;stroke-width:1.8}
+.dname{font-size:13px;font-weight:600;color:var(--text);font-family:var(--font-display)}
+.ddesc{font-size:12px;color:var(--text2);margin-top:6px;line-height:1.55;display:none}
+.dtab.active .ddesc{display:block}
+.live-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--g);background:var(--gs);border:1px solid rgba(0,214,143,.2);border-radius:20px;padding:4px 12px;margin-top:10px;font-weight:500}
+.live-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite}
+
+/* CASES */
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.case{border:1px solid var(--border);border-radius:14px;padding:20px;background:var(--bg2);transition:border-color .2s}
+.case:hover{border-color:var(--border2)}
+.ctag{display:inline-block;font-size:11px;background:var(--gs);border:1px solid rgba(0,214,143,.15);color:var(--g);padding:3px 10px;border-radius:6px;margin-bottom:10px;font-weight:500}
+.case h4{font-size:14px;font-weight:600;margin-bottom:6px;font-family:var(--font-display)}
+.case p{font-size:12px;color:var(--text2);line-height:1.65}
+.cres{margin-top:12px;font-size:12px;font-weight:600;color:var(--g)}
+.cres::before{content:'↑ '}
+
+/* FOUNDER */
+.founder-sec{padding:64px 36px;max-width:1100px;margin:0 auto}
+.founder-card{display:flex;gap:36px;align-items:center;border:1px solid var(--border2);border-radius:16px;padding:36px;background:var(--bg2);box-shadow:0 0 60px rgba(0,214,143,.04)}
+.founder-photo{width:110px;height:110px;border-radius:50%;border:2px solid var(--g);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:32px;font-weight:600;background:linear-gradient(135deg,#003d28,#00D68F22);color:var(--g);letter-spacing:-1px}
+.founder-info h3{font-family:var(--font-display);font-size:24px;font-weight:600;margin-bottom:4px;letter-spacing:-0.4px}
+.founder-title{font-size:13px;color:var(--g);margin-bottom:12px;font-weight:500}
+.founder-bio{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:18px;max-width:500px}
+.founder-links{display:flex;gap:10px;flex-wrap:wrap}
+.flink{display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--radius);border:1px solid var(--border2);font-size:13px;cursor:pointer;background:var(--bg);color:var(--text);text-decoration:none;transition:all .2s;font-weight:500}
+.flink:hover{background:var(--bg3);border-color:var(--g)}
+.flink.wa{background:var(--g);color:#001a10;border:none}
+.flink.wa:hover{background:var(--gd);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,214,143,.3)}
+.flink-icon{width:16px;height:16px}
+
+/* STACK */
+.stack-sec{padding:40px 36px;border-top:1px solid var(--border);max-width:1100px;margin:0 auto}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.pill{padding:6px 14px;border-radius:20px;border:1px solid var(--border2);font-size:12px;color:var(--text2);background:var(--bg2);transition:all .2s}
+.pill:hover{border-color:var(--g);color:var(--g)}
+
+/* CTA */
+.cta-sec{background:var(--bg2);padding:80px 36px;text-align:center;border-top:1px solid var(--border);position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(0,214,143,.08),transparent 70%);pointer-events:none}
+.cta-sec h2{font-family:var(--font-display);font-size:32px;font-weight:600;letter-spacing:-0.6px;margin-bottom:12px}
+.cta-sec p{color:var(--text2);margin-bottom:28px;font-size:15px}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+.footer{padding:22px 36px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text2)}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:48px 20px 40px}
+  .hero h1{font-size:32px}
+  .svc-grid{grid-template-columns:1fr}
+  .cases-grid{grid-template-columns:1fr}
+  .demo-inner{grid-template-columns:1fr}
+  .founder-card{flex-direction:column;align-items:flex-start}
+  .nav{padding:0 20px}
+  .nav-links{display:none}
+  .sec{padding:48px 20px}
+  .footer{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">
+    <div class="lm"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+    Nex<span>Flow</span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="go('services')">Services</a></li>
+    <li><a onclick="go('demo')">Démos</a></li>
+    <li><a onclick="go('cases')">Réalisations</a></li>
+    <li><a onclick="go('founder')">À propos</a></li>
+  </ul>
+  <div style="display:flex;gap:10px">
+    <a href="https://wa.me/213797745534" target="_blank" class="btn btn-g" style="text-decoration:none">WhatsApp</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="badge"><span class="dot"></span>Automatisation IA — Oran, Algérie</div>
+    <h1>Votre business tourne<br>même quand vous <span class="hl">dormez.</span></h1>
+    <p>Chatbots WhatsApp & Telegram, qualification automatique de leads, pipelines email IA — construits avec n8n et OpenAI pour tourner 24h/24.</p>
+    <div class="hbtns">
+      <button class="btn btn-g" onclick="go('demo')">Voir les démos live</button>
+      <button class="btn" onclick="go('cases')">Nos réalisations →</button>
+    </div>
+    <div class="metrics">
+      <div><div class="mval">15<span>+</span></div><div class="mlbl">Projets livrés</div></div>
+      <div><div class="mval">3</div><div class="mlbl">Pays clients</div></div>
+      <div><div class="mval">24<span>/7</span></div><div class="mlbl">Uptime bots</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="chat-shell">
+      <div class="chat-hdr">
+        <div class="hdr-av">NX</div>
+        <div><div class="hdr-n">NexFlow Assistant</div><div class="hdr-s">● En ligne maintenant</div></div>
+      </div>
+      <div class="chat-body" id="heroChatBody">
+        <div class="msg bot">Bonjour ! Je suis l'assistant IA NexFlow 👋<br>Comment puis-je vous aider ?</div>
+      </div>
+      <div class="chat-qr" id="heroQR">
+        <div class="qr" onclick="heroSend('Je veux un chatbot WhatsApp')">Chatbot WhatsApp</div>
+        <div class="qr" onclick="heroSend('Combien ça coûte ?')">Tarifs</div>
+        <div class="qr" onclick="heroSend('Automatiser mes leads')">Leads auto</div>
+      </div>
+      <div class="chat-inp">
+        <input id="heroInput" placeholder="Écrivez un message..." onkeydown="if(event.key==='Enter')heroSendInput()">
+        <button class="send-b" onclick="heroSendInput()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="sec" id="services">
+  <div class="sec-lbl">Ce qu'on construit</div>
+  <div class="sec-title">Nos services</div>
+  <div class="sec-sub">Des solutions IA sur mesure, construites avec n8n, OpenAI et les meilleures intégrations du marché.</div>
+  <div class="svc-grid">
+    <div class="svc">
+      <div class="sic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <h3>Chatbot WhatsApp & Web</h3>
+      <p>Bot intelligent qui répond, qualifie et convertit vos prospects 24h/24.</p>
+      <div class="stag">WhatsApp · Telegram · Web</div>
+    </div>
+    <div class="svc">
+      <div class="sic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Qualification de leads</h3>
+      <p>Système IA qui trie, score et classe vos leads dans votre CRM automatiquement.</p>
+      <div class="stag">GPT-4o · Google Sheets</div>
+    </div>
+    <div class="svc">
+      <div class="sic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <h3>Pipeline email IA</h3>
+      <p>Classification automatique + rédaction de réponses à vos emails entrants.</p>
+      <div class="stag">Gmail · OpenAI · n8n</div>
+    </div>
+    <div class="svc">
+      <div class="sic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <h3>Intégration CRM</h3>
+      <p>Connexion de vos outils — Perfex, Airtable, Google Sheets — avec des workflows intelligents.</p>
+      <div class="stag">Perfex · Airtable</div>
+    </div>
+    <div class="svc">
+      <div class="sic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <h3>Workflows sur mesure</h3>
+      <p>Automatisation complète : onboarding, relances, facturation, suivi commandes.</p>
+      <div class="stag">n8n · API · Webhooks</div>
+    </div>
+    <div class="svc">
+      <div class="sic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+      <h3>Maintenance & support</h3>
+      <p>Suivi mensuel, mises à jour et optimisation continue de vos automatisations.</p>
+      <div class="stag">Support · Monitoring</div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-wrap" id="demo">
+  <div class="demo-inner">
+    <div>
+      <div class="sec-lbl">Démos interactives</div>
+      <div class="sec-title">Testez en live</div>
+      <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:6px">Le bot "Ren Digitoo" ci-contre est un vrai bot IA en production. Tapez n'importe quoi.</p>
+      <div class="live-tag">Bot réel — connecté en live</div>
+      <div class="dtabs">
+        <div class="dtab active" onclick="switchDemo('rd',this)">
+          <div class="dtop"><div class="dic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="dname">Ren Digitoo — Agence Marketing</div></div>
+          <div class="ddesc">Bot de qualification leads en production pour cette agence d'Oran — réponses réelles via n8n.</div>
+        </div>
+        <div class="dtab" onclick="switchDemo('clinic',this)">
+          <div class="dtop"><div class="dic"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="dname">Dr. Drai Asmaa — Cabinet dentaire</div></div>
+          <div class="ddesc">Bot de prise de RDV pour cabinet dentaire en arabe, français et darija.</div>
+        </div>
+        <div class="dtab" onclick="switchDemo('immo',this)">
+          <div class="dtop"><div class="dic"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="dname">Agence immobilière</div></div>
+          <div class="ddesc">Bot de qualification acheteurs/locataires — filtre les leads avant passage agent.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="chat-shell">
+        <div class="chat-hdr">
+          <div class="hdr-av" id="dAv">RD</div>
+          <div><div class="hdr-n" id="dName">Ren Digitoo</div><div class="hdr-s">Assistant IA actif</div></div>
+        </div>
+        <div class="chat-body" id="dBody"></div>
+        <div class="chat-qr" id="dQR"></div>
+        <div class="chat-inp">
+          <input id="dInput" placeholder="Écrivez ici..." onkeydown="if(event.key==='Enter')dSendInput()">
+          <button class="send-b" onclick="dSendInput()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="sec" id="cases">
+  <div class="sec-lbl">Réalisations</div>
+  <div class="sec-title">Projets livrés</div>
+  <div class="sec-sub">Des solutions réelles, pour des vrais clients, avec des résultats mesurables.</div>
+  <div class="cases-grid">
+    <div class="case"><div class="ctag">Santé · Oran</div><h4>Dr. Drai Asmaa — Cabinet dentaire</h4><p>Chatbot IA Telegram + ManyChat Messenger pour prise de RDV en arabe, français et darija.</p><div class="cres">60% de RDV sans appel</div></div>
+    <div class="case"><div class="ctag">Marketing · Oran</div><h4>Ren Digitoo — Agence marketing</h4><p>Qualification de leads WhatsApp + CRM Google Sheets automatisé avec GPT-4o-mini.</p><div class="cres">Qualification 24h/24</div></div>
+    <div class="case"><div class="ctag">Tourisme · International</div><h4>Wheelzup Adventures</h4><p>Pipeline Gmail : classification IA, extraction de données, rédaction automatique de réponses.</p><div class="cres">80% du temps email économisé</div></div>
+    <div class="case"><div class="ctag">Services · International</div><h4>Dog Training Business</h4><p>Assistant IA Google Calendar multi-formateur avec GPT-4o et interface Telegram.</p><div class="cres">Réservations 100% automatisées</div></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="founder-sec" id="founder">
+  <div class="sec-lbl">À propos</div>
+  <div class="founder-card">
+    <div class="founder-photo">AK</div>
+    <div class="founder-info">
+      <h3>Amine Khatem</h3>
+      <div class="founder-title">Fondateur & AI Automation Developer</div>
+      <div class="founder-bio">Basé à Oran, je construis des solutions d'automatisation IA sur mesure pour les entreprises algériennes et internationales. Spécialiste n8n, OpenAI, WhatsApp API et CRM — je transforme les processus manuels en workflows intelligents qui tournent 24h/24.</div>
+      <div class="founder-links">
+        <a class="flink wa" href="https://wa.me/213797745534" target="_blank">
+          <svg class="flink-icon" viewBox="0 0 24 24" fill="#002b1e"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+          WhatsApp : +213 797 745 534
+        </a>
+        <a class="flink" href="https://linkedin.com/in/amine-khatem" target="_blank">
+          <svg class="flink-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn : amine khatem
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="stack-sec" id="stack">
+  <div class="sec-lbl">Stack technique</div>
+  <div class="pills">
+    <div class="pill">n8n</div><div class="pill">OpenAI GPT-4o</div><div class="pill">WhatsApp Business API</div><div class="pill">Telegram Bot API</div><div class="pill">Google Sheets</div><div class="pill">Airtable</div><div class="pill">Perfex CRM</div><div class="pill">Gmail API</div><div class="pill">ManyChat</div><div class="pill">Twilio</div><div class="pill">Webhooks REST</div><div class="pill">Google Calendar</div>
+  </div>
+</div>
+
+<div class="cta-sec" id="contact">
+  <div class="sec-lbl" style="text-align:center">Démarrons</div>
+  <h2>Prêt à automatiser votre business ?</h2>
+  <p>Consultation gratuite de 30 min — on analyse vos besoins et on propose une solution concrète.</p>
+  <div class="cta-btns">
+    <a class="btn btn-g" href="https://wa.me/213797745534?text=Bonjour%20Amine%2C%20je%20veux%20d%C3%A9marrer%20un%20projet%20d%27automatisation" target="_blank" style="text-decoration:none;display:inline-block">Démarrer sur WhatsApp →</a>
+    <a class="btn" href="https://linkedin.com/in/amine-khatem" target="_blank" style="text-decoration:none;display:inline-block">Voir LinkedIn</a>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="logo" style="font-size:16px"><div class="lm" style="width:22px;height:22px"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>Nex<span>Flow</span></div>
+  <div>Oran, Algérie — Automatisation IA sur mesure</div>
+  <div>© 2025 NexFlow</div>
+</div>
+
+
+<script>
+const WH='https://n8n.rendigitoo.com/webhook/a56cea44-17a6-42bb-a6c3-54df2c6c5162/chat';
+let sid='nf_'+Math.random().toString(36).substr(2,9);
+
+function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
+
+function addMsg(bid,txt,type){
+  const b=document.getElementById(bid);
+  const d=document.createElement('div');
+  d.className='msg '+type;
+  d.innerHTML=txt.replace(/\n/g,'<br>');
+  b.appendChild(d);
+  b.scrollTop=b.scrollHeight;
+}
+function showTyping(bid){
+  const b=document.getElementById(bid);
+  const d=document.createElement('div');
+  d.className='msg typing';d.id='typ_'+bid;d.textContent='En train d\'écrire...';
+  b.appendChild(d);b.scrollTop=b.scrollHeight;
+}
+function hideTyping(bid){const e=document.getElementById('typ_'+bid);if(e)e.remove();}
+
+async function callBot(msg){
+  try{
+    const r=await fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatInput:msg,sessionId:sid})});
+    if(!r.ok)throw new Error();
+    const d=await r.json();
+    return d.output||d.text||d.message||d.response||(Array.isArray(d)&&d[0]?.output)||'Réponse reçue ✓';
+  }catch{return 'Bot momentanément indisponible. Contactez-moi sur WhatsApp ! 📱';}
+}
+
+async function heroSend(msg){
+  addMsg('heroChatBody',msg,'user');
+  document.getElementById('heroQR').style.display='none';
+  showTyping('heroChatBody');
+  const r=await callBot(msg);
+  hideTyping('heroChatBody');
+  addMsg('heroChatBody',r,'bot');
+}
+async function heroSendInput(){
+  const i=document.getElementById('heroInput');
+  const m=i.value.trim();if(!m)return;i.value='';
+  await heroSend(m);
+}
+
+const demos={
+  rd:{av:'RD',name:'Ren Digitoo',welcome:'Bonjour ! Je suis l\'assistant de Ren Digitoo. Parlez-moi de votre projet marketing 🚀',qr:[['Ads Facebook & Instagram','Ads FB/IG'],['Gestion réseaux sociaux','Réseaux'],['Création de site web','Site web']],live:true},
+  clinic:{av:'Dr',name:'Dr. Drai Asmaa',welcome:'مرحبا ! Bienvenue au cabinet du Dr. Asmaa. Je peux vous aider à prendre rendez-vous 😊',qr:[['Prendre rendez-vous','RDV'],['Tarifs des soins','Tarifs'],['Urgence dentaire','Urgence']],live:false,r:{'rdv':'Parfait ! Dr. Asmaa est disponible : Mardi 10h, Jeudi 14h, Samedi 9h. Lequel vous convient ?','tarifs':'Consultation 1500 DA · Détartrage 3000 DA · Plombage 4500 DA. Avez-vous une mutuelle ?','urgence':'Dr. Asmaa peut vous recevoir aujourd\'hui avant 17h pour urgence. Laissez votre numéro ?','_':'Je vais vous aider ! Donnez-moi plus de détails sur votre besoin 😊'}},
+  immo:{av:'IM',name:'Agence Immobilière',welcome:'Bienvenue ! Vous cherchez à acheter, louer ou vendre un bien immobilier ?',qr:[['Acheter un appartement','Acheter'],['Location','Louer'],['Estimer mon bien','Estimer']],live:false,r:{'acheter':'Super projet ! Budget et quartier souhaité ? On a des biens de 3M à 25M DA sur Oran.','louer':'Pour la location : 25 000 à 80 000 DA/mois. Combien de pièces cherchez-vous ?','estimer':'Pour estimer votre bien, j\'ai besoin de la surface, l\'étage et le quartier. On commence ?','_':'Bonne question ! Quel est votre budget et dans quel quartier ?'}}
+};
+let cur='rd';
+
+function getR(key,msg){
+  const k=msg.toLowerCase().trim();
+  return demos[key].r[k]||demos[key].r['_'];
+}
+
+async function dSend(msg){
+  addMsg('dBody',msg,'user');
+  document.getElementById('dQR').innerHTML='';
+  showTyping('dBody');
+  let reply;
+  if(demos[cur].live){reply=await callBot(msg);}
+  else{await new Promise(r=>setTimeout(r,800));reply=getR(cur,msg);}
+  hideTyping('dBody');
+  addMsg('dBody',reply,'bot');
+}
+async function dSendInput(){
+  const i=document.getElementById('dInput');
+  const m=i.value.trim();if(!m)return;i.value='';
+  await dSend(m);
+}
+
+function switchDemo(key,tab){
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  cur=key;
+  sid='nf_'+Math.random().toString(36).substr(2,9);
+  const d=demos[key];
+  document.getElementById('dAv').textContent=d.av;
+  document.getElementById('dName').textContent=d.name;
+  document.getElementById('dBody').innerHTML='';
+  addMsg('dBody',d.welcome,'bot');
+  const qr=document.getElementById('dQR');
+  qr.innerHTML='';
+  d.qr.forEach(([msg,lbl])=>{
+    const b=document.createElement('div');
+    b.className='qr';b.textContent=lbl;
+    b.onclick=()=>dSend(msg);
+    qr.appendChild(b);
+  });
+  document.getElementById('dInput').value='';
+}
+switchDemo('rd',document.querySelector('.dtab'));
+</script>
+</body>
+</html>
