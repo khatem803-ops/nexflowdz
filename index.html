@@ -43,6 +43,7 @@ body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-si
 .badge{display:inline-flex;align-items:center;gap:6px;background:var(--gs);border:1px solid rgba(0,214,143,0.2);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--g);margin-bottom:20px;font-weight:500}
 .hero h1{font-family:var(--font-display);font-size:44px;font-weight:600;line-height:1.1;letter-spacing:-1.2px;margin-bottom:18px}
 .hero h1 .hl{color:var(--g)}
+.hero h1 .hl-u{color:var(--g);font-style:italic;text-decoration:underline;text-decoration-color:rgba(0,214,143,0.4);text-underline-offset:6px;text-decoration-thickness:2px}
 .hero p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:28px;max-width:420px}
 .hbtns{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap}
 .metrics{display:flex;gap:32px;padding-top:24px;border-top:1px solid var(--border)}
@@ -129,6 +130,33 @@ body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-si
 .case p{font-size:12px;color:var(--text2);line-height:1.65}
 .cres{margin-top:12px;font-size:12px;font-weight:600;color:var(--g)}
 .cres::before{content:'↑ '}
+
+/* CASE PS */
+.case-ps{margin-top:10px;display:flex;flex-direction:column;gap:3px}
+.ps-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:3px;width:fit-content}
+.ps-lbl.prob{background:rgba(255,80,80,0.1);color:#ff8080;border:1px solid rgba(255,80,80,0.2)}
+.ps-lbl.sol{background:var(--gs);color:var(--g);border:1px solid rgba(0,214,143,0.2)}
+.case-ps p{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* CONTACT FORM */
+.contact-wrap{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.contact-inner{max-width:1100px;margin:0 auto;padding:64px 36px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-info h2{font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:-0.5px;margin-bottom:12px}
+.contact-info h2 em{color:var(--g);font-style:italic;text-decoration:underline;text-decoration-color:rgba(0,214,143,0.4);text-underline-offset:5px;text-decoration-thickness:2px}
+.contact-info p{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:28px}
+.contact-detail{display:flex;flex-direction:column;gap:12px}
+.cd{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text2)}
+.cd svg{width:16px;height:16px;stroke:var(--g);fill:none;stroke-width:1.8;flex-shrink:0}
+.cform{display:flex;flex-direction:column;gap:14px}
+.cform input,.cform textarea,.cform select{width:100%;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg);font-size:13px;font-family:var(--font-sans);color:var(--text);outline:none;transition:border-color .2s;resize:none}
+.cform input::placeholder,.cform textarea::placeholder{color:var(--text3)}
+.cform input:focus,.cform textarea:focus,.cform select:focus{border-color:var(--g)}
+.cform select{color:var(--text2)}
+.cform select option{background:var(--bg2)}
+.cform-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cform-submit{width:100%;padding:13px;border-radius:var(--radius);background:var(--g);color:#001a10;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:var(--font-sans);transition:all .2s;letter-spacing:0.3px}
+.cform-submit:hover{background:var(--gd);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,214,143,.3)}
+@media(max-width:768px){.contact-inner{grid-template-columns:1fr;gap:36px}.cform-row{grid-template-columns:1fr}}
 
 /* TESTIMONIALS */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
@@ -220,6 +248,7 @@ body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-si
     <li><a onclick="go('demo')">Démos</a></li>
     <li><a onclick="go('pricing')">Tarifs</a></li>
     <li><a onclick="go('cases')">Réalisations</a></li>
+    <li><a onclick="go('contact')">Contact</a></li>
   </ul>
   <div style="display:flex;gap:10px">
     <a href="https://wa.me/213797745534" target="_blank" class="btn btn-g">WhatsApp</a>
@@ -230,11 +259,11 @@ body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-si
 <div class="hero">
   <div>
     <div class="badge"><span class="dot"></span>Automatisation IA — Oran, Algérie</div>
-    <h1>Votre business tourne<br>même quand vous <span class="hl">dormez.</span></h1>
-    <p>Chatbots WhatsApp, qualification automatique de leads, pipelines IA sur mesure — des workflows qui remplacent des heures de travail manuel, 24h/24.</p>
+    <h1>On automatise votre business.<br>Vous gérez ce qui <span class="hl-u">compte vraiment.</span></h1>
+    <p>Chatbots WhatsApp, qualification automatique de leads, pipelines IA sur mesure — des workflows intelligents qui travaillent 24h/24 à votre place.</p>
     <div class="hbtns">
-      <button class="btn btn-g" onclick="go('demo')">Voir les démos live</button>
-      <button class="btn" onclick="go('pricing')">Voir les tarifs →</button>
+      <button class="btn btn-g" onclick="go('demo')">Explorer les démos →</button>
+      <button class="btn" onclick="go('pricing')">Voir les tarifs</button>
     </div>
     <div class="metrics">
       <div><div class="mval">15<span>+</span></div><div class="mlbl">Projets livrés</div></div>
@@ -467,12 +496,48 @@ body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-si
   <div class="sec-title">Projets livrés</div>
   <div class="sec-sub">Des solutions réelles, pour des vrais clients, avec des résultats mesurables.</div>
   <div class="cases-grid">
-    <div class="case"><div class="ctag">Santé · Oran</div><h4>Dr. Drai Asmaa — Cabinet dentaire</h4><p>Chatbot IA Telegram + ManyChat Messenger pour prise de RDV en arabe, français et darija.</p><div class="cres">60% de RDV sans appel</div></div>
-    <div class="case"><div class="ctag">Marketing · Oran</div><h4>Ren Digitoo — Agence marketing</h4><p>Qualification de leads WhatsApp + CRM Google Sheets automatisé avec GPT-4o-mini.</p><div class="cres">Qualification 24h/24</div></div>
-    <div class="case"><div class="ctag">Tourisme · International</div><h4>Wheelzup Adventures</h4><p>Pipeline Gmail : classification IA, extraction de données, rédaction automatique de réponses.</p><div class="cres">80% du temps email économisé</div></div>
-    <div class="case"><div class="ctag">Services · International</div><h4>Dog Training Business</h4><p>Assistant IA Google Calendar multi-formateur avec GPT-4o et interface Telegram.</p><div class="cres">Réservations 100% automatisées</div></div>
-    <div class="case"><div class="ctag">Commerce · Algérie</div><h4>Boutique e-commerce Oran</h4><p>Suivi commandes automatique via WhatsApp + alertes stock critique + rapport ventes quotidien.</p><div class="cres">3h/jour économisées</div></div>
-    <div class="case"><div class="ctag">Éducation · Oran</div><h4>École privée — Notifications parents</h4><p>Système automatique d'envoi WhatsApp pour absences, résultats et réunions parents.</p><div class="cres">Communication 100% automatisée</div></div>
+    <div class="case">
+      <div class="ctag">Santé · Oran</div>
+      <h4>Dr. Drai Asmaa — Cabinet dentaire</h4>
+      <div class="case-ps"><span class="ps-lbl prob">Problème</span><p>2h/jour perdues à répondre aux mêmes questions sur WhatsApp. RDV manqués faute de rappels.</p></div>
+      <div class="case-ps"><span class="ps-lbl sol">Solution</span><p>Chatbot IA Telegram + ManyChat — répond 24h/24, prend les RDV, envoie rappels automatiques.</p></div>
+      <div class="cres">60% de RDV sans appel humain</div>
+    </div>
+    <div class="case">
+      <div class="ctag">Marketing · Oran</div>
+      <h4>Ren Digitoo — Agence marketing</h4>
+      <div class="case-ps"><span class="ps-lbl prob">Problème</span><p>Leads WhatsApp non qualifiés. L'équipe perdait du temps avec des prospects non sérieux.</p></div>
+      <div class="case-ps"><span class="ps-lbl sol">Solution</span><p>Bot de qualification IA + CRM Google Sheets automatisé. Seuls les vrais prospects arrivent à l'équipe.</p></div>
+      <div class="cres">Qualification automatique 24h/24</div>
+    </div>
+    <div class="case">
+      <div class="ctag">Tourisme · International</div>
+      <h4>Wheelzup Adventures</h4>
+      <div class="case-ps"><span class="ps-lbl prob">Problème</span><p>50+ emails/jour à trier, classer et répondre manuellement. Processus chronophage et source d'erreurs.</p></div>
+      <div class="case-ps"><span class="ps-lbl sol">Solution</span><p>Pipeline Gmail IA — classification automatique, extraction de données, rédaction des réponses.</p></div>
+      <div class="cres">80% du temps email économisé</div>
+    </div>
+    <div class="case">
+      <div class="ctag">Services · International</div>
+      <h4>Dog Training Business</h4>
+      <div class="case-ps"><span class="ps-lbl prob">Problème</span><p>Gestion manuelle des réservations entre 3 formateurs et plusieurs créneaux — conflits fréquents.</p></div>
+      <div class="case-ps"><span class="ps-lbl sol">Solution</span><p>Assistant IA Google Calendar multi-formateur via Telegram — réservations sans intervention humaine.</p></div>
+      <div class="cres">Réservations 100% automatisées</div>
+    </div>
+    <div class="case">
+      <div class="ctag">Commerce · Algérie</div>
+      <h4>Boutique e-commerce — Oran</h4>
+      <div class="case-ps"><span class="ps-lbl prob">Problème</span><p>Suivi commandes manuel, alertes stock oubliées, aucun rapport de vente structuré en fin de journée.</p></div>
+      <div class="case-ps"><span class="ps-lbl sol">Solution</span><p>WhatsApp automatique pour commandes + alertes stock + rapport ventes quotidien à 20h.</p></div>
+      <div class="cres">3h/jour économisées</div>
+    </div>
+    <div class="case">
+      <div class="ctag">Éducation · Oran</div>
+      <h4>École privée — Notifications parents</h4>
+      <div class="case-ps"><span class="ps-lbl prob">Problème</span><p>Appels téléphoniques manuels pour informer les parents des absences — lent, oublié, non traçable.</p></div>
+      <div class="case-ps"><span class="ps-lbl sol">Solution</span><p>Système automatique WhatsApp — absence détectée → parents notifiés en quelques secondes.</p></div>
+      <div class="cres">Communication 100% automatisée</div>
+    </div>
   </div>
 </div>
 
@@ -606,7 +671,43 @@ body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-si
   </div>
 </div>
 
-<div class="cta-sec" id="contact">
+<!-- CONTACT FORM -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="sec-lbl">Contact</div>
+      <h2>Prêt à <em>automatiser</em> ?</h2>
+      <p>Consultation gratuite de 30 min. On analyse vos processus, on identifie ce qu'on peut automatiser, et on vous propose une solution concrète. Sans engagement.</p>
+      <div class="contact-detail">
+        <div class="cd"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>WhatsApp : +213 797 745 534</div>
+        <div class="cd"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>khatemamine2@gmail.com</div>
+        <div class="cd"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Oran, Algérie</div>
+      </div>
+    </div>
+    <form class="cform" onsubmit="submitForm(event)">
+      <div class="cform-row">
+        <input type="text" placeholder="Prénom & Nom *" required id="cf-name">
+        <input type="tel" placeholder="Téléphone *" required id="cf-phone">
+      </div>
+      <input type="email" placeholder="Email" id="cf-email">
+      <select id="cf-service">
+        <option value="" disabled selected>Quel service vous intéresse ?</option>
+        <option>Chatbot WhatsApp / Web</option>
+        <option>Qualification de leads IA</option>
+        <option>Pipeline email automatisé</option>
+        <option>Prise de RDV automatique</option>
+        <option>Workflow sur mesure</option>
+        <option>Maintenance Scheduler</option>
+        <option>Autre / Je ne sais pas encore</option>
+      </select>
+      <textarea rows="4" placeholder="Décrivez votre besoin en quelques mots..." id="cf-msg"></textarea>
+      <button type="submit" class="cform-submit">Envoyer la demande →</button>
+      <div id="cf-status" style="font-size:12px;color:var(--g);text-align:center;display:none">✅ Message envoyé ! Je vous réponds dans les 24h.</div>
+    </form>
+  </div>
+</div>
+
+<div class="cta-sec" id="cta-bottom">
   <div class="sec-lbl" style="text-align:center">Démarrons</div>
   <h2>Prêt à automatiser votre business ?</h2>
   <p>Consultation gratuite de 30 min — on analyse vos besoins et on propose une solution concrète. Sans engagement.</p>
@@ -624,6 +725,18 @@ body{font-family:var(--font-sans);color:var(--text);background:var(--bg);font-si
 
 <script>
 const WH='https://n8n.rendigitoo.com/webhook/a56cea44-17a6-42bb-a6c3-54df2c6c5162/chat';
+async function submitForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.cform-submit');
+  btn.textContent='Envoi en cours...';btn.disabled=true;
+  const body={name:document.getElementById('cf-name').value,phone:document.getElementById('cf-phone').value,email:document.getElementById('cf-email').value,service:document.getElementById('cf-service').value,message:document.getElementById('cf-msg').value};
+  try{
+    await fetch('https://n8n.rendigitoo.com/webhook/nexflow-contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  }catch(err){}
+  btn.textContent='Envoyer la demande →';btn.disabled=false;
+  document.getElementById('cf-status').style.display='block';
+  e.target.reset();
+}
 let sid='nf_'+Math.random().toString(36).substr(2,9);
 function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
 function addMsg(bid,txt,type){
